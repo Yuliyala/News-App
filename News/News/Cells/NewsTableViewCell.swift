@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 class NewsTableViewCell: UITableViewCell {
     
@@ -14,6 +15,7 @@ class NewsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var fotoImageView: UIImageView!
     
     
     override func awakeFromNib() {
@@ -27,5 +29,10 @@ class NewsTableViewCell: UITableViewCell {
     func setup(model: Articles) {
         titleLabel.text = model.title
         descriptionLabel.text = model.description
+        
+        fotoImageView.contentMode = .scaleAspectFit
+        
+        let url = URL(string: model.urlToImage ?? "")
+        fotoImageView.kf.setImage(with: url)
     }
 }

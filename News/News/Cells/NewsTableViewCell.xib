@@ -66,6 +66,7 @@
             <viewLayoutGuide key="safeArea" id="Way-NG-SAP"/>
             <connections>
                 <outlet property="descriptionLabel" destination="UiL-sj-GBP" id="iGL-DV-Ka4"/>
+                <outlet property="fotoImageView" destination="uuu-id-kjt" id="iH4-QW-ac3"/>
                 <outlet property="titleLabel" destination="WeH-Vf-gRw" id="Fyf-KS-Gnp"/>
             </connections>
             <point key="canvasLocation" x="-10" y="81"/>

@@ -73,5 +73,15 @@ extension ViewController : UITableViewDataSource {
 
 
 extension ViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destination = storyboard.instantiateViewController(withIdentifier: "DetailsViewController")
+        guard let destination = destination as? DetailsViewController else
+        { return }
+        let article = dataSource[indexPath.row]
+        destination.article = article
+        destination.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(destination, animated: true)
+        
+    }
 }

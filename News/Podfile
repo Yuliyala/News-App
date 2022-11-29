@@ -7,5 +7,6 @@ target 'News' do
 
   # Pods for News
   pod 'Alamofire'
+  pod 'Kingfisher', '~> 7.0'
 
 end
