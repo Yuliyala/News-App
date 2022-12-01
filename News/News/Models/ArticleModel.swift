@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct NewsResponse: Codable {
     let articles: [Articles]
 }
@@ -23,11 +22,11 @@ struct Articles: Codable {
     let content: String?
     
     var fullAuthor: String {
-//        var endString = ""
-//        if let author = author {
-//            endString = ", " + author
-//        }
-//        return source.name + endString
+        //        var endString = ""
+        //        if let author = author {
+        //            endString = ", " + author
+        //        }
+        //        return source.name + endString
         source.name + (author != nil ? ", \(author!)" : "")
     }
 }

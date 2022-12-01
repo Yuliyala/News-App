@@ -9,7 +9,6 @@ import UIKit
 import SafariServices
 import Kingfisher
 
-
 class DetailsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -26,9 +25,8 @@ class DetailsViewController: UIViewController {
         
         setupViews()
         setup()
-
+        
     }
-
     
     func setup() {
         titleLabel.text = article.title
@@ -39,7 +37,7 @@ class DetailsViewController: UIViewController {
         let url = URL(string: article.urlToImage ?? "")
         imageView.kf.setImage(with: url)
     }
-
+    
     func setupViews() {
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         titleLabel.textAlignment = .center
@@ -67,12 +65,12 @@ class DetailsViewController: UIViewController {
     
     func openURL() {
         if let url = URL(string: article.url) {
-//            UIApplication.shared.open(url)
+            //            UIApplication.shared.open(url)
             let safariController = SFSafariViewController(url: url)
             present(safariController, animated: true)
         }
     }
-  
+    
 }
 
 

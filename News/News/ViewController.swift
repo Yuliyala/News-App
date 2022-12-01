@@ -9,11 +9,8 @@ import UIKit
 import Alamofire
 
 class ViewController: UIViewController {
-    
-    
     var dataSource = [Articles]()
     var apiServise = APIService()
-    
     
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -52,7 +49,6 @@ class ViewController: UIViewController {
     }
 }
 
-
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -70,8 +66,6 @@ extension ViewController : UITableViewDataSource {
     }
 }
 
-
-
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -82,6 +76,5 @@ extension ViewController : UITableViewDelegate {
         destination.article = article
         destination.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(destination, animated: true)
-        
     }
 }

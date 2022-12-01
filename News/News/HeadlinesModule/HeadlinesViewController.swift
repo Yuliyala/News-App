@@ -8,8 +8,6 @@
 import UIKit
 
 class HeadlinesViewController: UIViewController {
-    
-    
     var dataSource = [Articles]()
     let apiService = APIService()
     
@@ -48,9 +46,7 @@ class HeadlinesViewController: UIViewController {
         loadArticles()
         
     }
-    
 }
-
 
 extension HeadlinesViewController: UITableViewDataSource {
     
@@ -70,7 +66,7 @@ extension HeadlinesViewController: UITableViewDataSource {
 
 extension HeadlinesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destination = storyboard.instantiateViewController(withIdentifier: "DetailsViewController")
         guard  let destination = destination as? DetailsViewController else
         { return }
