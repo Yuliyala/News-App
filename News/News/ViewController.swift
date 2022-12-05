@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var apiServise = APIService()
     
     @IBOutlet weak var searchTextField: UITextField!
-    
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -39,6 +39,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func textFieldDidEndOnExit(_ sender: Any) {
+        loadArticles()
+    }
+    
+    @IBAction func textFieldEditingChanged(_ sender: Any) {
         loadArticles()
     }
     
