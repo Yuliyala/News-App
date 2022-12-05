@@ -10,15 +10,17 @@ import Alamofire
 
 class ViewController: UIViewController {
     var dataSource = [Articles]()
-    var apiServise = APIService()
+    var apiService = APIService()
     
-    @IBOutlet weak var searchTextField: UITextField!
-
+//    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        setupSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,8 +29,8 @@ class ViewController: UIViewController {
     }
     
     func loadArticles(){
-        guard let text = searchTextField.text, text.count > 0 else { return }
-        apiServise.loadArticles(topic: text) { response in
+        guard let text = searchController.searchBar.text, text.count > 0 else { return }
+        apiService.loadArticles(topic: text) { response in
             if let response = response {
                 self.dataSource = response.articles
                 self.tableView.reloadData()
@@ -38,18 +40,27 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func textFieldDidEndOnExit(_ sender: Any) {
-        loadArticles()
-    }
-    
-    @IBAction func textFieldEditingChanged(_ sender: Any) {
-        loadArticles()
-    }
+//    @IBAction func textFieldDidEndOnExit(_ sender: Any) {
+//        loadArticles()
+//    }
+//
+//    @IBAction func textFieldEditingChanged(_ sender: Any) {
+//        loadArticles()
+//    }
     
     func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: NewsTableViewCell.identifier)
+    }
+     
+    func setupSearchController() {
+//        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+//        definesPresentationContext = true
     }
 }
 
@@ -81,4 +92,17 @@ extension ViewController : UITableViewDelegate {
         destination.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(destination, animated: true)
     }
+}
+
+
+extension ViewController: UISearchBarDelegate{
+    func updateSearchResults(for searchController: UISearchController) {
+       loadArticles()
+    }
+
+    // Search
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+  loadArticles()
+   
+}
 }
