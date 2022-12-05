@@ -9,14 +9,11 @@ import UIKit
 import Alamofire
 
 class ViewController: UIViewController {
-    
-    
     var dataSource = [Articles]()
     var apiServise = APIService()
     
-    
     @IBOutlet weak var searchTextField: UITextField!
-    
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -45,13 +42,16 @@ class ViewController: UIViewController {
         loadArticles()
     }
     
+    @IBAction func textFieldEditingChanged(_ sender: Any) {
+        loadArticles()
+    }
+    
     func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: NewsTableViewCell.identifier)
     }
 }
-
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,8 +70,15 @@ extension ViewController : UITableViewDataSource {
     }
 }
 
-
-
 extension ViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destination = storyboard.instantiateViewController(withIdentifier: "DetailsViewController")
+        guard let destination = destination as? DetailsViewController else
+        { return }
+        let article = dataSource[indexPath.row]
+        destination.article = article
+        destination.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(destination, animated: true)
+    }
 }
