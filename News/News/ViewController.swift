@@ -10,15 +10,17 @@ import Alamofire
 
 class ViewController: UIViewController {
     var dataSource = [Articles]()
-    var apiServise = APIService()
+    var apiService = APIService()
     
-    @IBOutlet weak var searchTextField: UITextField!
-
+//    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    
+    lazy var searchBar:UISearchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        setupSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,10 +29,11 @@ class ViewController: UIViewController {
     }
     
     func loadArticles(){
-        guard let text = searchTextField.text, text.count > 0 else { return }
-        apiServise.loadArticles(topic: text) { response in
+        guard let text = searchBar.text, text.count > 0 else { return }
+        apiService.loadArticles(topic: text) { response in
             if let response = response {
                 self.dataSource = response.articles
+                print(response.articles.count)
                 self.tableView.reloadData()
             } else {
                 print("Error")
@@ -38,18 +41,29 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func textFieldDidEndOnExit(_ sender: Any) {
-        loadArticles()
-    }
-    
-    @IBAction func textFieldEditingChanged(_ sender: Any) {
-        loadArticles()
-    }
+//    @IBAction func textFieldDidEndOnExit(_ sender: Any) {
+//        loadArticles()
+//    }
+//
+//    @IBAction func textFieldEditingChanged(_ sender: Any) {
+//        loadArticles()
+//    }
     
     func setTableView() {
+        tableView.backgroundColor = .red
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: NewsTableViewCell.identifier)
+    }
+     
+    func setupSearchController() {
+        searchBar.searchBarStyle = UISearchBar.Style.default
+          searchBar.placeholder = " Search..."
+          searchBar.sizeToFit()
+          searchBar.isTranslucent = false
+          searchBar.backgroundImage = UIImage()
+          searchBar.delegate = self
+          navigationItem.titleView = searchBar
     }
 }
 
@@ -80,5 +94,13 @@ extension ViewController : UITableViewDelegate {
         destination.article = article
         destination.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(destination, animated: true)
+    }
+}
+
+
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String)
+    {
+       loadArticles()
     }
 }

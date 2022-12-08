@@ -51,21 +51,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s88-bu-5bL">
-                                <rect key="frame" x="20" y="88" width="374" height="45"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="wrZ-44-wHc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="textFieldDidEndOnExit:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="KEQ-dr-z8h"/>
-                                    <action selector="textFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="Shz-vC-Jyf"/>
-                                </connections>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-jt-x58">
-                                <rect key="frame" x="0.0" y="133" width="414" height="680"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -73,10 +60,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h0R-jt-x58" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1qj-he-0mq"/>
-                            <constraint firstItem="h0R-jt-x58" firstAttribute="top" secondItem="s88-bu-5bL" secondAttribute="bottom" id="49y-DR-YqE"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s88-bu-5bL" secondAttribute="trailing" constant="20" id="WC4-sA-kgB"/>
-                            <constraint firstItem="s88-bu-5bL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eXg-Oe-NCU"/>
-                            <constraint firstItem="s88-bu-5bL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sln-7Q-1Zm"/>
+                            <constraint firstItem="h0R-jt-x58" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9L6-BZ-g1i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="h0R-jt-x58" secondAttribute="bottom" id="xhV-Jn-8wa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h0R-jt-x58" secondAttribute="trailing" id="zPZ-Bg-hrj"/>
                         </constraints>
@@ -85,7 +69,6 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchTextField" destination="s88-bu-5bL" id="8bS-6W-cSH"/>
                         <outlet property="tableView" destination="h0R-jt-x58" id="CVi-Ta-9sW"/>
                     </connections>
                 </viewController>
@@ -248,9 +231,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
