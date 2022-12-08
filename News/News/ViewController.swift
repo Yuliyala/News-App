@@ -15,7 +15,7 @@ class ViewController: UIViewController {
 //    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    let searchController = UISearchController(searchResultsController: nil)
+    lazy var searchBar:UISearchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +29,11 @@ class ViewController: UIViewController {
     }
     
     func loadArticles(){
-        guard let text = searchController.searchBar.text, text.count > 0 else { return }
+        guard let text = searchBar.text, text.count > 0 else { return }
         apiService.loadArticles(topic: text) { response in
             if let response = response {
                 self.dataSource = response.articles
+                print(response.articles.count)
                 self.tableView.reloadData()
             } else {
                 print("Error")
@@ -49,18 +50,20 @@ class ViewController: UIViewController {
 //    }
     
     func setTableView() {
+        tableView.backgroundColor = .red
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: NewsTableViewCell.identifier)
     }
      
     func setupSearchController() {
-//        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        navigationItem.searchController = searchController
-//        definesPresentationContext = true
+        searchBar.searchBarStyle = UISearchBar.Style.default
+          searchBar.placeholder = " Search..."
+          searchBar.sizeToFit()
+          searchBar.isTranslucent = false
+          searchBar.backgroundImage = UIImage()
+          searchBar.delegate = self
+          navigationItem.titleView = searchBar
     }
 }
 
@@ -95,14 +98,9 @@ extension ViewController : UITableViewDelegate {
 }
 
 
-extension ViewController: UISearchBarDelegate{
-    func updateSearchResults(for searchController: UISearchController) {
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String)
+    {
        loadArticles()
     }
-
-    // Search
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-  loadArticles()
-   
-}
 }
